@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  # 「get "top"」の部分を書き換えてください
+  get "posts/index" => "posts#index"
+
   get "/" => "home#top"
   get "about" => "home#about"
 end
