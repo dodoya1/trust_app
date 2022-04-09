@@ -2,8 +2,11 @@ Rails.application.routes.draw do
   get "posts/index" => "posts#index"
   get "posts/new" => "posts#new"
   get "posts/:id" => "posts#show"
-  # データを送信するためのルーティングを追加してください
   post "posts/create" => "posts#create"
+  get "posts/:id/edit" => "posts#edit"
+  post "posts/:id/update" => "posts#update"
+  # destroyアクションへのルーティングを追加してください
+  post "posts/:id/destroy" => "posts#destroy"
   
   get "/" => "home#top"
   get "about" => "home#about"
