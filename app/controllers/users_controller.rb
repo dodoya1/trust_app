@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
   before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
-  # before_actionにensure_correct_userメソッドを指定してください
   before_action :ensure_correct_user, {only: [:edit, :update]}
   
   def index
@@ -78,7 +77,14 @@ class UsersController < ApplicationController
     redirect_to("/login")
   end
   
-  # ensure_correct_userを定義してください
+  def likes
+    # 変数@userを定義してください
+    @user = User.find_by(id: params[:id])
+    
+    # 変数@likesを定義してください
+    @likes = Like.where(user_id: @user.id)
+  end
+  
   def ensure_correct_user
     if @current_user.id != params[:id].to_i
       flash[:notice] = "権限がありません"

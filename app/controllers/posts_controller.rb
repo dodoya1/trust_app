@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
   before_action :authenticate_user
-  # before_actionでensure_correct_userメソッドを指定してください
   before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
   
   def index
@@ -10,6 +9,8 @@ class PostsController < ApplicationController
   def show
     @post = Post.find_by(id: params[:id])
     @user = @post.user
+    # 変数@likes_countを定義してください
+    @likes_count = Like.where(post_id: @post.id).count
   end
   
   def new
@@ -51,7 +52,6 @@ class PostsController < ApplicationController
     redirect_to("/posts/index")
   end
   
-  # ensure_correct_userメソッドを定義してください
   def ensure_correct_user
     @post = Post.find_by(id: params[:id])
     if @post.user_id != @current_user.id
